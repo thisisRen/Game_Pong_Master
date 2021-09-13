@@ -6,24 +6,53 @@ using UnityEngine.UI;
 
 public class LevelUIManager : MonoBehaviour
 {
-    [Header("UI Manager")]
+    public static LevelUIManager Instance;
+
+    [Header("UI")]
     public GameObject pausePopup;
 
     public Text target;
+
     public Image imageTarget;
+
     public Sprite cup, star, glass;
 
     public Text modeGameText;
 
+    public GameObject ball;
+
+    public RectTransform groupBallUI;
+
+    [Header("Background")]
+    public SpriteRenderer backgroundGame;
+
+    public List<Sprite> background;
+
+    private int t;
+
+    private List<GameObject> ballUI;
+    private int currentBall;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
-        
+        t = Random.Range(0, background.Count);
+        backgroundGame.sprite = background[t];
+        ballUI = new List<GameObject>();
+        currentBall = 0;
+
+        ShowUI();
+        SpawnBallUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShowUI();
+
+        
     }
     public void PlayAgain()
     {
@@ -67,9 +96,24 @@ public class LevelUIManager : MonoBehaviour
         }
         
     }
-    private void ShowModeGame()
+    public void SpawnBallUI()
     {
-       
+   
+        for(int i=0; i<GameController.Instance.numberBall; i++)
+        {
+            GameObject b = Instantiate(ball, Vector3.zero, Quaternion.identity);
+            b.GetComponent<RectTransform>().SetParent(groupBallUI);
+            ballUI.Add(b);
+        }
+    }
+    public void BallGray()
+    {
+        for (int i=0; i< GameController.Instance.numberBall; i++)
+        {
+            if(i==currentBall)
+                ballUI[i].GetComponent<Image>().color = Color.gray;
+        }
+        currentBall++;
     }
  
 }

@@ -7,6 +7,7 @@ public class StoreManager : MonoBehaviour
     public static StoreManager Instance;
 
     public DATA_CUP cup;
+    public DATA_BALL ball;
 
     public GameObject store;
 
@@ -27,25 +28,21 @@ public class StoreManager : MonoBehaviour
         leftButton.enabled = false;
         rightButton.enabled = false;
         store.GetComponent<ShowUIStore>().ShowCup();
+       
     }
     public void Ball() //Ball button
     {
         leftButton.enabled = true;
         rightButton.enabled = true;
-        TurnLeft();
+        store.GetComponent<ShowUIStore>().ShowBall();
+
     }
     public void Back() //Back button
     {
         cup.SaveData();
         gameObject.SetActive(false);
+
     }
-    public void TurnLeft()
-    {
-        store.GetComponent<ShowUIStore>().ShowBall1();
-    }
-    public void TurnRight()
-    {
-        store.GetComponent<ShowUIStore>().ShowBall2();
-    }
+   
 
 }

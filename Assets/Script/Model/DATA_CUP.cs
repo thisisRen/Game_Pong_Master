@@ -32,6 +32,7 @@ public class DATA_CUP : ScriptableObject
         {
             StoreCup[i].IsBuy = StoreBuy[i] == '0' ? false : true;
             StoreCup[i].IsChoose = StoreChoose[i] == '0' ? false : true;
+ 
         }
     }
     public void SaveData() //luu data

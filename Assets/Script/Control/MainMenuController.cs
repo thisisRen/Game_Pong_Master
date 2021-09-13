@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
-    public GameObject store, mainMenu;
+    public GameObject store, mainMenu, chapter;
     public DATA_CUP cup;
+    public DATA_BALL ball;
+    public DATALEVEL level;
     void Start()
     {
-        
+        cup.LoadData();
+       // ball.LoadData();
+        //level.LoadData();
     }
 
     public void ShowStore()
     {
-        cup.LoadData();
         mainMenu.SetActive(false);
         store.SetActive(true);
 
+    }
+    public void Chapter()
+    {
+        mainMenu.SetActive(false);
+        chapter.SetActive(true);
     }
     
    

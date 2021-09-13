@@ -28,30 +28,23 @@ public class ShowUIStore : MonoBehaviour
     public RectTransform parentBall1, parentBall2;
     public GameObject prefabsBall;
     private List<GameObject> listBall = new List<GameObject>();
-    public void ShowBall1()
+
+    public void ShowBall()
     {
         for (int i = 0; i < listBall.Count; i++) Destroy(listBall[i]);
-        listCup.Clear();
-        for (int i = 0; i < 9; i++)
+        listBall.Clear();
+        for (int i = 0; i < listBall.Count; i++)
         {
             GameObject g = Instantiate(prefabsBall, Vector3.zero, Quaternion.identity);
-            g.transform.SetParent(parentBall1);
-            g.transform.localScale = Vector3.one;
-            g.GetComponent<BallElement>().SetData(ball.StoreBall[i]);
-            listBall.Add(g);
-        }
-
-        float dY = ball.StoreBall.Count % 3 == 0 ? (float)ball.StoreBall.Count / 3f * 300f : ((float)ball.StoreBall.Count / 3f + 1f) * 300f;
-    }
-
-    public void ShowBall2()
-    {
-        for (int i = 0; i < listBall.Count; i++) Destroy(listBall[i]);
-        listCup.Clear();
-        for (int i = 9; i < listBall.Count; i++)
-        {
-            GameObject g = Instantiate(prefabsBall, Vector3.zero, Quaternion.identity);
-            g.transform.SetParent(parentBall2);
+            if (i % 2 == 0)
+            {
+                g.transform.SetParent(parentBall1);
+            }
+            else
+            {
+                g.transform.SetParent(parentBall2);
+            }
+            
             g.transform.localScale = Vector3.one;
             g.GetComponent<BallElement>().SetData(ball.StoreBall[i]);
             listBall.Add(g);

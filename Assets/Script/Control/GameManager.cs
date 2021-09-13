@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private int numberBallUse;
     private int index;
     private Vector2 currentTransform;
+
     private void Start()
     {
         cam = Camera.main;
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
         index = 0;
 
         currentTransform = ball.transform.position;
+
+       
     }
     private void Update()
     {
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
             isDragging = false;
             OnDragEnd();
             StartCoroutine(GetNewBall(0.5f));
+            LevelUIManager.Instance.BallGray();
         }
         if (isDragging)
         {
@@ -93,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GetNewBall(float waitTime)
     {
-        if (GameController.Instance.numberBall - numberBallUse >= 0)
+        if ((GameController.Instance.numberBall-1) - numberBallUse >= 0)
         {
             yield return new WaitForSeconds(waitTime);
             ObjectPooler.Instance.ballList[index].transform.position = currentTransform;

@@ -123,8 +123,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CupElement, Assembly-CSharp
+      - m_Target: {fileID: -685211822820473186}
+        m_TargetAssemblyTypeName: BallElement, Assembly-CSharp
         m_MethodName: AvatarOnClicked
         m_Mode: 1
         m_Arguments:

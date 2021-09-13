@@ -9,42 +9,43 @@ public class DATA_BALL : ScriptableObject
 
     public void LoadData()
     {
-        string StoreChoose = "";
-        string StoreBuy = "";
-        if (PlayerPrefs.GetInt("IsStart1") == 0)
+        string StoreChooseBall = "";
+        string StoreBuyBall = "";
+        if (PlayerPrefs.GetInt("IsStartBall") == 0)
         {
-            StoreBuy = "1";
-            StoreChoose = "1";
+            StoreBuyBall = "1";
+            StoreChooseBall = "1";
             for (int i = 1; i < StoreBall.Count; i++)
             {
-                StoreBuy += "0";
-                StoreChoose += "0";
+                StoreBuyBall += "0";
+                StoreChooseBall += "0";
             }
-            PlayerPrefs.SetInt("IsStart1", 1);
+            PlayerPrefs.SetInt("IsStartBall", 1);
         }
         else
         {
-            StoreBuy = PlayerPrefs.GetString("StoreBuy1");
-            StoreChoose = PlayerPrefs.GetString("StoreChoose1");
+            StoreBuyBall = PlayerPrefs.GetString("StoreBuyBall");
+            StoreChooseBall = PlayerPrefs.GetString("StoreChooseBall");
         }
 
         for (int i = 0; i < StoreBall.Count; i++)
         {
-            StoreBall[i].IsBuy = StoreBuy[i] == '0' ? false : true;
-            StoreBall[i].IsChoose = StoreChoose[i] == '0' ? false : true;
+            StoreBall[i].IsBuy = StoreBuyBall[i] == '0' ? false : true;
+            StoreBall[i].IsChoose = StoreChooseBall[i] == '0' ? false : true;
         }
+
     }
     public void SaveData() //luu data
     {
-        string StoreChoose = "";
-        string StoreBuy = "";
+        string StoreChooseBall = "";
+        string StoreBuyBall = "";
         for (int i = 0; i < StoreBall.Count; i++)
         {
-            StoreChoose += StoreBall[i].IsChoose ? "1" : "0";
-            StoreBuy += StoreBall[i].IsBuy ? "1" : "0";
+            StoreChooseBall += StoreBall[i].IsChoose ? "1" : "0";
+            StoreBuyBall += StoreBall[i].IsBuy ? "1" : "0";
         }
-        PlayerPrefs.SetString("StoreBuy1", StoreBuy);
-        PlayerPrefs.SetString("StoreChoose1", StoreChoose);
+        PlayerPrefs.SetString("StoreBuyBall", StoreBuyBall);
+        PlayerPrefs.SetString("StoreChooseBall", StoreChooseBall);
     }
 
     public int FindIndexStoreChoose()  // tim character da duoc chon
