@@ -33,7 +33,7 @@ public class ShowUIStore : MonoBehaviour
     {
         for (int i = 0; i < listBall.Count; i++) Destroy(listBall[i]);
         listBall.Clear();
-        for (int i = 0; i < listBall.Count; i++)
+        for (int i = 0; i < ball.StoreBall.Count; i++)
         {
             GameObject g = Instantiate(prefabsBall, Vector3.zero, Quaternion.identity);
             if (i % 2 == 0)
@@ -44,7 +44,6 @@ public class ShowUIStore : MonoBehaviour
             {
                 g.transform.SetParent(parentBall2);
             }
-            
             g.transform.localScale = Vector3.one;
             g.GetComponent<BallElement>().SetData(ball.StoreBall[i]);
             listBall.Add(g);

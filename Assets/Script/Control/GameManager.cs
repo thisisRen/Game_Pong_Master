@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private int index;
     private Vector2 currentTransform;
 
+    public int done = 0;
+
     private void Start()
     {
         cam = Camera.main;
@@ -109,6 +111,10 @@ public class GameManager : MonoBehaviour
 
             
         }
+    }
+    public int TargetDone()
+    {
+        return done;
     }
 }
  

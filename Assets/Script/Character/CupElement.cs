@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class CupElement : MonoBehaviour
 {
     public static CupElement Instance;
+
     private Cup data;
+
     public DATA_CUP model;
+
     public Image avatar;
+
     public Button elementCup;
+
     public Image done;
+
     public Sprite notDone, isDone;
 
     private void Awake()

@@ -11,7 +11,7 @@ public class LevelUIManager : MonoBehaviour
     [Header("UI")]
     public GameObject pausePopup;
 
-    public Text target;
+    public Text target, targetDone;
 
     public Image imageTarget;
 
@@ -24,7 +24,7 @@ public class LevelUIManager : MonoBehaviour
     public RectTransform groupBallUI;
 
     [Header("Background")]
-    public SpriteRenderer backgroundGame;
+    public GameObject backgroundGame;
 
     public List<Sprite> background;
 
@@ -40,7 +40,9 @@ public class LevelUIManager : MonoBehaviour
     void Start()
     {
         t = Random.Range(0, background.Count);
-        backgroundGame.sprite = background[t];
+        backgroundGame.GetComponent<Transform>().localScale = new Vector3(0.5f, 0.8f, 1f);
+        backgroundGame.GetComponent<SpriteRenderer>().sprite = background[t];
+
         ballUI = new List<GameObject>();
         currentBall = 0;
 
@@ -51,8 +53,9 @@ public class LevelUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      //  UpdateTarget();
 
-        
+
     }
     public void PlayAgain()
     {
@@ -115,5 +118,8 @@ public class LevelUIManager : MonoBehaviour
         }
         currentBall++;
     }
- 
+    public void UpdateTarget()
+    {
+        targetDone.text = GameManager.Instance.TargetDone().ToString();
+    }
 }

@@ -4,13 +4,21 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public abstract class UIMove : MonoBehaviour
+public class UIMove : MonoBehaviour
 {
-    [SerializeField] private RectTransform reactLeft;
-    [SerializeField] private RectTransform reactRight;
+    [SerializeField] private RectTransform react;
+    public float newPos;
+    public float time;
 
-    public virtual void TurnLeft()
+    private void Start()
     {
-        
+        Turn();
+    }
+    public void Turn()
+    {
+        react.DOAnchorPosX(newPos, time).OnComplete(() =>
+        {
+            react.DOKill();
+        });
     }
 }

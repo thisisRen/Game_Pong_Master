@@ -13,7 +13,7 @@ public class ShowUILevel : MonoBehaviour
     {
         for (int i = 0; i < list.Count; i++) Destroy(list[i]);
         list.Clear();
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < level.listLevel.Count; i++)
         {
             GameObject g = Instantiate(prefabs, Vector3.zero, Quaternion.identity);
             g.transform.SetParent(parent);

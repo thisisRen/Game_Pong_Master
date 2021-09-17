@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class LevelElement : MonoBehaviour
 {
     public static LevelElement Instance;
@@ -28,19 +29,16 @@ public class LevelElement : MonoBehaviour
         levelNumber.text = data.ID.ToString();
         if(data.isPlay == false)
         {
-            elementLevel.GetComponent<Image>().color = Color.gray;
             lockLevel.enabled = true;
             start.SetActive(false);
         }
         else if(data.isPlay == true && data.stars == 0)
         {
-            elementLevel.GetComponent<Image>().color = Color.gray;
             lockLevel.enabled = false;
             start.SetActive(false);
         }
         else if(data.isPlay == true && data.stars != 0)
         {
-            elementLevel.GetComponent<Image>().color = Color.white;
             lockLevel.enabled = false;
             start.SetActive(true);
         }
@@ -50,7 +48,7 @@ public class LevelElement : MonoBehaviour
     /// </summary>
     public void AvatarOnClicked()
     {
-      
 
+        SceneManager.LoadScene(1);
     }
 }

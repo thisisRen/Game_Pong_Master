@@ -10,9 +10,10 @@ public class MainMenuController : MonoBehaviour
     public DATALEVEL level;
     void Start()
     {
+        //savedata() all to update new data
+        ball.LoadData();
+        level.LoadData();
         cup.LoadData();
-       // ball.LoadData();
-        //level.LoadData();
     }
 
     public void ShowStore()
@@ -26,6 +27,5 @@ public class MainMenuController : MonoBehaviour
         mainMenu.SetActive(false);
         chapter.SetActive(true);
     }
-    
-   
+
 }

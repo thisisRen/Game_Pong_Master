@@ -8,6 +8,7 @@ public class BallControl : MonoBehaviour
     [HideInInspector] public CircleCollider2D col;
 
     public static bool ballIncup;
+
     [HideInInspector] public Vector3 pos {
         get { return transform.position;}
     }
@@ -36,9 +37,9 @@ public class BallControl : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
 
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if(collision.collider.tag == "Cup" && collision.collider.GetType() == typeof(BoxCollider2D))
+        if (collider.tag == "Cup" && collider.GetType() == typeof(BoxCollider2D))
         {
             ballIncup = true;
         }

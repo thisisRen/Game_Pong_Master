@@ -66,6 +66,7 @@ public class DATALEVEL : ScriptableObject
         public string name;
         public GameObject gamePlay;
         public bool isPlay;
+        public bool current;
         public int stars;
     }
 

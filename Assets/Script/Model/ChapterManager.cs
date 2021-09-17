@@ -5,9 +5,10 @@ using UnityEngine;
 public class ChapterManager : MonoBehaviour
 {
     public DATALEVEL level;
+    public GameObject parentLevel;
     void Start()
     {
-        
+        parentLevel.GetComponent<ShowUILevel>().ShowLevel();
     }
 
     // Update is called once per frame
