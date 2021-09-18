@@ -9,6 +9,8 @@ public class BallControl : MonoBehaviour
 
     public static bool ballIncup;
 
+    public DATA_BALL data;
+
     [HideInInspector] public Vector3 pos {
         get { return transform.position;}
     }
@@ -17,6 +19,10 @@ public class BallControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
         ballIncup = false;
+    }
+    private void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = data.StoreBall[data.FindIndexStoreChoose()].avatar;
     }
     public void Push(Vector2 force)
     {
@@ -37,7 +43,7 @@ public class BallControl : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
 
     }
-    private void OnTriggerStay2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "Cup" && collider.GetType() == typeof(BoxCollider2D))
         {

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474039271004121258}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2597768696310952205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 38608d226dd0c4f409204b212a94955a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6933e8638d4236b45b878bf20ddd21f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -427,7 +427,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6757984730208486956}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6453813633193350022}
+        m_TargetAssemblyTypeName: LevelElement, Assembly-CSharp
+        m_MethodName: AvatarOnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6453813633193350022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +457,10 @@ MonoBehaviour:
   lockLevel: {fileID: 6665665706181372638}
   start: {fileID: 7937839268430043395}
   elementLevel: {fileID: 1503170403712612902}
+  star:
+  - {fileID: 2694944903375084385}
+  - {fileID: 1884323335881947941}
+  - {fileID: 8144694447456168919}
 --- !u!1 &7937839268430043395
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8054730391245035041}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

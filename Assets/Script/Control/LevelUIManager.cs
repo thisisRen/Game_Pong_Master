@@ -23,6 +23,9 @@ public class LevelUIManager : MonoBehaviour
 
     public RectTransform groupBallUI;
 
+    [Header("POPUP")] public GameObject popupComplete;
+    [Header("POPUP")] public GameObject popupGameOver;
+
     [Header("Background")]
     public GameObject backgroundGame;
 
@@ -31,11 +34,14 @@ public class LevelUIManager : MonoBehaviour
     private int t;
 
     private List<GameObject> ballUI;
-    private int currentBall;
+    public int currentBall;
 
     private void Awake()
     {
         Instance = this;
+
+        GamePongMaster.Win += CompletedGame;
+        GamePongMaster.Lose += GameOver;
     }
     void Start()
     {
@@ -48,17 +54,23 @@ public class LevelUIManager : MonoBehaviour
 
         ShowUI();
         SpawnBallUI();
+
+     
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-      //  UpdateTarget();
+        UpdateTarget();
 
 
     }
     public void PlayAgain()
     {
+        GamePongMaster.Win -= CompletedGame;
+        GamePongMaster.Lose -= GameOver;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Pause()
@@ -111,15 +123,49 @@ public class LevelUIManager : MonoBehaviour
     }
     public void BallGray()
     {
-        for (int i=0; i< GameController.Instance.numberBall; i++)
+        if(GameManager.numberBallUse != 0)
         {
-            if(i==currentBall)
-                ballUI[i].GetComponent<Image>().color = Color.gray;
+            for (int i = 0; i < GameController.Instance.numberBall; i++)
+            {
+                if (i == currentBall)
+                    ballUI[i].GetComponent<Image>().color = Color.gray;
+            }
+            currentBall++;
+
+            Debug.Log(currentBall);
         }
-        currentBall++;
+        
     }
     public void UpdateTarget()
     {
-        targetDone.text = GameManager.Instance.TargetDone().ToString();
+        targetDone.text = GameManager.TargetDone().ToString();
     }
+
+
+    private IEnumerator PopupComplete()
+    {
+        yield return new WaitForSeconds(2f);
+        
+
+        popupComplete.SetActive(true);
+    }
+
+    private IEnumerator PopupGameOver()
+    {
+        yield return new WaitForSeconds(5f);
+       
+        popupGameOver.SetActive(true);
+    }
+    
+    private void CompletedGame()
+    {
+        GamePongMaster.Lose -= GameOver;
+        StartCoroutine(PopupComplete());
+    }
+    private void GameOver()
+    {
+        GamePongMaster.Win -= CompletedGame;
+        StartCoroutine(PopupGameOver());
+    }
+
 }

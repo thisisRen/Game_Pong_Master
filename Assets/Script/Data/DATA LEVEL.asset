@@ -13,23 +13,33 @@ MonoBehaviour:
   m_Name: DATA LEVEL
   m_EditorClassIdentifier: 
   listLevel:
+  - ID: 0
+    name: 
+    gamePlay: {fileID: 3330294317585360152, guid: d3c76b7fea4f00c4894015597d6810a7, type: 3}
+    isPlay: 1
+    current: 1
+    stars: 3
   - ID: 1
     name: 
-    gamePlay: {fileID: 8706605130265190324, guid: d3c76b7fea4f00c4894015597d6810a7, type: 3}
-    isPlay: 1
-    stars: 0
+    gamePlay: {fileID: 4833119963598878022, guid: 1cc9a840d0a600645a5400abc87ef9e4, type: 3}
+    isPlay: 0
+    current: 0
+    stars: 3
   - ID: 2
     name: 
-    gamePlay: {fileID: 6506806114690579992, guid: 1cc9a840d0a600645a5400abc87ef9e4, type: 3}
-    isPlay: 1
-    stars: 0
+    gamePlay: {fileID: 2128838487686272600, guid: e9e4dd0af8063a242be1b855079941a9, type: 3}
+    isPlay: 0
+    current: 0
+    stars: 3
   - ID: 3
     name: 
-    gamePlay: {fileID: 2518011890072317200, guid: e9e4dd0af8063a242be1b855079941a9, type: 3}
+    gamePlay: {fileID: 5189615479678501473, guid: 0b2f4587c166fdc49ab9a91672f211df, type: 3}
     isPlay: 0
-    stars: 0
+    current: 0
+    stars: 3
   - ID: 4
     name: 
-    gamePlay: {fileID: 8852705466487821375, guid: 0b2f4587c166fdc49ab9a91672f211df, type: 3}
+    gamePlay: {fileID: 3100056912046851195, guid: 05fc982a255eaa943bb01c2b2fcac610, type: 3}
     isPlay: 0
+    current: 0
     stars: 0

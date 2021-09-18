@@ -41,11 +41,11 @@ public class DATALEVEL : ScriptableObject
         PlayerPrefs.SetString("LevelChoose", LevelPlay);
     }
 
-    public int FindIndexListChoose()
+    public int FindIndexListChoosing()
     {
         for (int i = 0; i < listLevel.Count; i++)
         {
-            if (listLevel[i].isPlay) return i;
+            if (listLevel[i].current) return i;
         }
         return 0;
     }
@@ -53,9 +53,9 @@ public class DATALEVEL : ScriptableObject
     {
         foreach (Level element in listLevel)
         {
-            element.isPlay = false;
+            element.current = false;
         }
-        listLevel[index].isPlay = true;
+        listLevel[index].current = true;
     }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChapterManager : MonoBehaviour
 {
     public DATALEVEL level;
-    public GameObject parentLevel;
+    public GameObject parentLevel, menu;
     void Start()
     {
         parentLevel.GetComponent<ShowUILevel>().ShowLevel();
@@ -20,5 +20,6 @@ public class ChapterManager : MonoBehaviour
     {
         level.SaveData();
         gameObject.SetActive(false);
+        menu.SetActive(true);
     }
 }

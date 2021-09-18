@@ -27,12 +27,14 @@ public class GameManager : MonoBehaviour
     Vector2 direction;
     Vector2 force;
     float distance;
-    private int numberBallUse;
+    public static int numberBallUse;
     private int index;
     private Vector2 currentTransform;
 
-    public int done = 0;
+    public static int done = 0;
 
+    public GameObject effect;
+    public List<Sprite> effectSprite;
     private void Start()
     {
         cam = Camera.main;
@@ -43,9 +45,14 @@ public class GameManager : MonoBehaviour
 
         currentTransform = ball.transform.position;
 
-       
+        done = 0;
+
     }
     private void Update()
+    {
+        Play();
+    }
+    private void Play()
     {
         if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
         {
@@ -58,6 +65,8 @@ public class GameManager : MonoBehaviour
             OnDragEnd();
             StartCoroutine(GetNewBall(0.5f));
             LevelUIManager.Instance.BallGray();
+
+            FindObjectOfType<AudioManager>().Play("BallJump");
         }
         if (isDragging)
         {
@@ -88,9 +97,16 @@ public class GameManager : MonoBehaviour
 
         ball.ActivateRb();
         ball.Push(force);
+
         trajectory.Hide();
         numberBallUse += 1;
-        
+
+        //set lose
+        if(numberBallUse == GameController.Instance.numberBall && done < GameController.Instance.numCup )
+        {
+            GamePongMaster.Lose.Invoke();
+           
+        }
     }
     private bool IsMouseOverUI()
     {
@@ -99,22 +115,46 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GetNewBall(float waitTime)
     {
-        if ((GameController.Instance.numberBall-1) - numberBallUse >= 0)
+        if ((GameController.Instance.numberBall - 1) - numberBallUse >= 0 && numberBallUse != 0)
         {
             yield return new WaitForSeconds(waitTime);
             ObjectPooler.Instance.ballList[index].transform.position = currentTransform;
             ObjectPooler.Instance.ballList[index].GetComponent<BallControl>().DeactivateRb();
-            
+
             ObjectPooler.Instance.ballList[index].SetActive(true);
             ball = ObjectPooler.Instance.ballList[index].GetComponent<BallControl>();
             index++;
 
-            
+
         }
+        
+        
     }
-    public int TargetDone()
+    public static int TargetDone()
     {
         return done;
     }
+    private void ChangeEffect()
+    {
+        if(numberBallUse == GameController.Instance.numberBall - 1)
+        {
+            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[0];
+        }
+        else if (numberBallUse == GameController.Instance.numberBall - 2)
+        {
+            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[1];
+        }
+        else
+        {
+            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[2];
+        }
+
+
+    }
+    public static int NumberBallUse()
+    {
+        return numberBallUse;
+    }
+
 }
  
