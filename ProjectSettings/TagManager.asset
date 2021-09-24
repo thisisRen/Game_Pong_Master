@@ -7,6 +7,9 @@ TagManager:
   - Cup
   - Wall
   - Ball
+  - BodyCup
+  - Teleport
+  - Saw
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Layer A
-  - Layer B
+  - 
+  - 
   - 
   - 
   - 
@@ -43,4 +46,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GameElement
+    uniqueID: 272408061
+    locked: 0
+  - name: UI
+    uniqueID: 1639999821
+    locked: 0
+  - name: Cannon
+    uniqueID: 123178497
     locked: 0

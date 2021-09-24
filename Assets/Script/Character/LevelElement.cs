@@ -14,16 +14,12 @@ public class LevelElement : MonoBehaviour
     public GameObject start;
 
     public Button elementLevel;
-
+    public Sprite notComplete;
     public List<Image> star;
   
     private void Awake()
     {
         Instance = this;
-    }
-    private void Update()
-    {
-       
     }
     public void SetData(Level _data) 
     {
@@ -32,16 +28,19 @@ public class LevelElement : MonoBehaviour
         if(data.isPlay == false)
         {
             lockLevel.enabled = true;
+            elementLevel.GetComponent<Image>().sprite = notComplete;
             start.SetActive(false);
         }
-        else if(data.isPlay == true && data.stars == 0)
+        else if(data.isPlay == true && data.stars < 3)
         {
             lockLevel.enabled = false;
+            elementLevel.GetComponent<Image>().sprite = notComplete;
             start.SetActive(false);
         }
-        else if(data.isPlay == true && data.stars != 0)
+        else if(data.isPlay == true && data.stars == 3)
         {
             lockLevel.enabled = false;
+            elementLevel.image.color = Color.white;
             start.SetActive(true);
         }
 

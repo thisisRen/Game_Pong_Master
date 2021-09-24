@@ -68,5 +68,6 @@ public class DATALEVEL : ScriptableObject
         public bool isPlay;
         public bool current;
         public int stars;
+        public int coin = 15;
     }
 

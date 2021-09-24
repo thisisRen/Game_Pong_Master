@@ -1,15 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    public static MainMenuController Instance;
+
     public GameObject store, mainMenu, chapter, setting;
     public DATA_CUP cup;
     public DATA_BALL ball;
     public DATALEVEL level;
+    public Text maxLevel;
+    public Text coin;
+
+    [SerializeField] private RectTransform ballIcon;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
+        
+
+        coin.text = PlayerPrefs.GetInt("Coin").ToString();
+
         ball.SaveData();
         level.SaveData();
         cup.SaveData();
@@ -17,6 +34,7 @@ public class MainMenuController : MonoBehaviour
         ball.LoadData();
         level.LoadData();
         cup.LoadData();
+        FindObjectOfType<AudioManager>().PlayMusic("MusicMainGame");
     }
 
     public void ShowStore()
@@ -35,4 +53,11 @@ public class MainMenuController : MonoBehaviour
         mainMenu.SetActive(false);
         setting.SetActive(true);
     }
+    
+    public void UseButton()
+    {
+        cup.SaveData();
+        ball.SaveData();
+    }
+    
 }

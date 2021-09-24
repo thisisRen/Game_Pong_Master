@@ -16,36 +16,51 @@ public class CupElement : MonoBehaviour
 
     public Image done;
 
-    public Sprite notDone, isDone;
+    public Sprite isDone;
+
+    private static int idCup;
 
     private void Awake()
     {
         Instance = this;
     }
+    private void Start()
+    {
+        StoreManager.Instance.useButtonText.text = "USING";
+        StoreManager.Instance.useButton.GetComponent<Image>().sprite = StoreManager.Instance.bought;
+        StoreManager.Instance.coinInButton.enabled = false;
+    }
     private void Update()
     {
-        if(data.IsBuy == true && data.IsChoose == false)
+        if (data.current == false)
         {
             done.enabled = false;
         }
+        if(data.IsBuy == true)
+        {
+            elementCup.image.color = Color.white;
+        }
+        ButtonBuy();
     }
-    public void SetData(Cup _data) //show 1 cup in store
+    public void SetData(Cup _data) //show 1 cup in store when start
     {
         data = _data;
         avatar.sprite = data.avatar;
         if (data.IsBuy == false)
         {
-            done.enabled = true;
+            data.current = false;
+            done.enabled = false;
             elementCup.image.color = Color.gray;
-            done.sprite = notDone;
         }
         else if(data.IsBuy == true && data.IsChoose == false)
         {
+            data.current = false;
             elementCup.image.color = Color.white;
             done.enabled = false;
         }
         else if (data.IsBuy == true && data.IsChoose == true)
         {
+            data.current = true;
             done.enabled = true;
             elementCup.image.color = Color.white;
             done.sprite = isDone;
@@ -54,17 +69,42 @@ public class CupElement : MonoBehaviour
     /// <summary>
     /// choose a cup to play
     /// </summary>
+ 
     public void AvatarOnClicked() 
     {
-        if (data.IsBuy == true)
+        data.current = true;
+        ButtonBuy();
+        model.Clean(data.ID);
+        done.enabled = true; done.sprite = isDone;
+        idCup = data.ID;
+    }
+    public int AvatarCurrent()
+    {
+        return idCup;
+    }
+    public void ButtonBuy()
+    {
+        if(data.current == true)
         {
-            data.IsChoose = true;
-            done.enabled = true; done.sprite = isDone;
-            model.Refresh(data.ID);
-            model.SaveData();
+            if (data.IsBuy == true && data.IsChoose == false)
+            {
+                StoreManager.Instance.useButtonText.text = "USE";
+                StoreManager.Instance.useButton.GetComponent<Image>().sprite = StoreManager.Instance.bought;
+                StoreManager.Instance.coinInButton.enabled = false;
+            }
+            else if (data.IsBuy == true && data.IsChoose == true)
+            {
+                StoreManager.Instance.useButtonText.text = "USING";
+                StoreManager.Instance.useButton.GetComponent<Image>().sprite = StoreManager.Instance.bought;
+                StoreManager.Instance.coinInButton.enabled = false;
+            }
+            else
+            {
+                StoreManager.Instance.useButtonText.text = data.Price.ToString();
+                StoreManager.Instance.useButton.GetComponent<Image>().sprite = StoreManager.Instance.buy;
+                StoreManager.Instance.coinInButton.enabled = true;
+            }
         }
-       
-
     }
     
     

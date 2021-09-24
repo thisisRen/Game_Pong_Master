@@ -11,6 +11,9 @@ public class BallControl : MonoBehaviour
 
     public DATA_BALL data;
 
+    public ParticleSystem ball, breakBall;
+
+
     [HideInInspector] public Vector3 pos {
         get { return transform.position;}
     }
@@ -23,6 +26,12 @@ public class BallControl : MonoBehaviour
     private void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = data.StoreBall[data.FindIndexStoreChoose()].avatar;
+        ball.transform.position = gameObject.transform.position;
+        breakBall.transform.position = gameObject.transform.position;
+    }
+    private void Update()
+    {
+        
     }
     public void Push(Vector2 force)
     {
@@ -40,15 +49,24 @@ public class BallControl : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GetComponent<ParticleSystem>().Play();
-
+        ball.Play();
+        if (collision.collider.tag == "Saw")
+        {
+            breakBall.Play();
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            gameObject.GetComponent<Renderer>().enabled = false;
+        }
+       
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Cup" && collider.GetType() == typeof(BoxCollider2D))
+        if (collider.tag == "Cup")
         {
             ballIncup = true;
+
+          
         }
+        
 
     }
 

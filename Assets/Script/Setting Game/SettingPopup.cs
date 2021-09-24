@@ -4,28 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SettingPopup : MonoBehaviour
 {
+    public static SettingPopup Instance;
     public GameObject menu;
-    public DATA_MENU data;
+    public DATA_MENU dataMenu;
 
     public Image music, effect; 
     public List<Sprite> listSprite; //0 sound on - 1 sound off - 2 effect on - 3 effect off
 
-    public void Sound()
-    {
-        
+    private void Awake()
+    {  
+        Instance = this;
     }
     private void Show()
     {
-        if (data.Sound[0].onSound)
+        if (dataMenu.Sound[0].onSound)
         {
             music.sprite = listSprite[0];
+
         }
         else
         {
             music.sprite = listSprite[1];
         }
 
-        if (data.Sound[1].onSound)
+        if (dataMenu.Sound[1].onSound)
         {
             effect.sprite = listSprite[2];
         }
@@ -34,36 +36,45 @@ public class SettingPopup : MonoBehaviour
             effect.sprite = listSprite[3];
         }
     }
+    private void Update()
+    {
+        Show();
+    }
     public void Home()
     {
-        data.SaveData();
+        dataMenu.SaveData();
         gameObject.SetActive(false);
         menu.SetActive(true);
     }
 
     public void SoundGame()
     {
-        if (data.Sound[0].onSound)
+        if (dataMenu.Sound[0].onSound)
         {
-            data.Sound[0].onSound = false;
+            dataMenu.Sound[0].onSound = false;
+     
         }
         else
         {
-            data.Sound[0].onSound = true;
+            dataMenu.Sound[0].onSound = true;
+            
         }
         Show();
     }
 
     public void Effect()
     {
-        if (data.Sound[1].onSound)
+        if (dataMenu.Sound[1].onSound)
         {
-            data.Sound[1].onSound = false;
+            dataMenu.Sound[1].onSound = false;
+        
         }
         else
         {
-            data.Sound[1].onSound = true;
+            dataMenu.Sound[1].onSound = true;
+            
         }
         Show();
     }
+   
 }

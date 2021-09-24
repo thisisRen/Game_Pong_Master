@@ -56,13 +56,22 @@ public class DATA_CUP : ScriptableObject
         }
         return 0;
     }
-    public void Refresh(int index)  // xet cac character khong duoc chon ve khong duoc chon
+    public void Refresh(int index)  // xet cac character khong duoc chon hien tai ve khong duoc chon
     {
         foreach (Cup element in StoreCup)
         {
             element.IsChoose = false;
         }
         StoreCup[index].IsChoose = true;
+    }
+
+    public void Clean(int index)  
+    {
+        foreach (Cup element in StoreCup)
+        {
+            element.current = false;
+        }
+        StoreCup[index].current = true;
     }
 }
 
@@ -74,7 +83,7 @@ public class Cup
     public Sprite avatar;
 
     public int Price;
-
+    public bool current;
     public bool IsBuy;
     public bool IsChoose;
 }

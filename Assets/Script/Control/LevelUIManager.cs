@@ -11,6 +11,10 @@ public class LevelUIManager : MonoBehaviour
     [Header("UI")]
     public GameObject pausePopup;
 
+    public Text level;
+
+    public DATALEVEL dataLevel;
+
     public Text target, targetDone;
 
     public Image imageTarget;
@@ -23,6 +27,7 @@ public class LevelUIManager : MonoBehaviour
 
     public RectTransform groupBallUI;
 
+    public ParticleSystem cannonEffect;
     [Header("POPUP")] public GameObject popupComplete;
     [Header("POPUP")] public GameObject popupGameOver;
 
@@ -31,7 +36,7 @@ public class LevelUIManager : MonoBehaviour
 
     public List<Sprite> background;
 
-    private int t;
+    private int t, l;
 
     private List<GameObject> ballUI;
     public int currentBall;
@@ -39,9 +44,6 @@ public class LevelUIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        GamePongMaster.Win += CompletedGame;
-        GamePongMaster.Lose += GameOver;
     }
     void Start()
     {
@@ -55,8 +57,11 @@ public class LevelUIManager : MonoBehaviour
         ShowUI();
         SpawnBallUI();
 
-     
+        l = dataLevel.listLevel[dataLevel.FindIndexListChoosing()].ID + 1;
+        level.text = "LEVEL " + l.ToString();
 
+        GamePongMaster.Win += CompletedGame;
+        GamePongMaster.Lose += GameOver;
 
     }
 
@@ -64,25 +69,22 @@ public class LevelUIManager : MonoBehaviour
     void Update()
     {
         UpdateTarget();
-
-
     }
     public void PlayAgain()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    private void OnDestroy()
+    {
         GamePongMaster.Win -= CompletedGame;
         GamePongMaster.Lose -= GameOver;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Pause()
     {
-        Time.timeScale = 0f;
         pausePopup.SetActive(true);
+        Time.timeScale = 0f;
     }
-    public void Continue()
-    {
-        Time.timeScale = 1f;
-        pausePopup.SetActive(false);
-    }
+    
     public void Home()
     {
         Time.timeScale = 1f;
@@ -118,21 +120,23 @@ public class LevelUIManager : MonoBehaviour
         {
             GameObject b = Instantiate(ball, Vector3.zero, Quaternion.identity);
             b.GetComponent<RectTransform>().SetParent(groupBallUI);
+            b.transform.localScale = Vector3.one;
             ballUI.Add(b);
         }
     }
     public void BallGray()
     {
+       
         if(GameManager.numberBallUse != 0)
-        {
+        { 
+            
             for (int i = 0; i < GameController.Instance.numberBall; i++)
             {
                 if (i == currentBall)
                     ballUI[i].GetComponent<Image>().color = Color.gray;
             }
             currentBall++;
-
-            Debug.Log(currentBall);
+        
         }
         
     }
@@ -144,28 +148,33 @@ public class LevelUIManager : MonoBehaviour
 
     private IEnumerator PopupComplete()
     {
-        yield return new WaitForSeconds(2f);
-        
+        yield return new WaitForSeconds(3f);
 
+        
         popupComplete.SetActive(true);
     }
 
     private IEnumerator PopupGameOver()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
        
         popupGameOver.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayMusic("GameOver");
     }
     
     private void CompletedGame()
     {
         GamePongMaster.Lose -= GameOver;
         StartCoroutine(PopupComplete());
+
     }
     private void GameOver()
     {
         GamePongMaster.Win -= CompletedGame;
         StartCoroutine(PopupGameOver());
     }
-
+    public void PlayCannon()
+    {
+        cannonEffect.Play();
+    }
 }

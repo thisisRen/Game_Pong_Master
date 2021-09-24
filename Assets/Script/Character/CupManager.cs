@@ -25,42 +25,36 @@ public class CupManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.transform.position.y < -5f)
+        if (gameObject.GetComponent<RectTransform>().position.y < -5f && GameManager.done < GameController.Instance.numCup)
         {
+            
             GamePongMaster.Lose.Invoke();
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Ball" && BallControl.ballIncup == true)
+        if (collider.tag == "Ball" )
         {
 
-            FindObjectOfType<AudioManager>().Play("CollectCup");
 
+            FindObjectOfType<AudioManager>().PlayEffect("CollectCup");
             GameManager.done += 1;
 
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
             animatorEffect.SetBool("effect", true);
             collider.GetComponent<Renderer>().enabled = false;
+            collider.gameObject.SetActive(false);
+
             StartCoroutine(HideCup());
-
-
-            //SET WIN
-            if (GameManager.done == GameController.Instance.numCup)
-            {
-                GamePongMaster.Win?.Invoke();
-                
-
-            }
-
         }
+        
     }
 
     private IEnumerator HideCup()
     {
         yield return new WaitForSeconds(1.5f);
-        gameObject.GetComponent<RectTransform>().DOScale(hideCup, 0.5f).OnComplete(() =>
+        gameObject.GetComponent<Transform>().DOScale(hideCup, 0.5f).OnComplete(() =>
         {
             
             gameObject.GetComponent<RectTransform>().DOKill();

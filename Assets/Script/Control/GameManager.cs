@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
 
     public static int done = 0;
 
-    public GameObject effect;
-    public List<Sprite> effectSprite;
+    public float timeToWait;
+
     private void Start()
     {
         cam = Camera.main;
@@ -47,12 +47,39 @@ public class GameManager : MonoBehaviour
 
         done = 0;
 
+        GamePongMaster.Play += Play;
+
     }
     private void Update()
     {
-        Play();
+    
+        GamePongMaster.Play?.Invoke();
+        if(GameController.Instance.modeGame == ModeGame.Mode.BEER)
+        {
+            if (done == GameController.Instance.numCup)
+            {
+                GamePongMaster.Play -= Play;
+                GamePongMaster.Win?.Invoke();
+               
+
+            }
+        }
+        else if (GameController.Instance.modeGame == ModeGame.Mode.STAR)
+        {
+            if (done == GameController.Instance.numStar)
+            {
+                GamePongMaster.Play -= Play;
+                GamePongMaster.Win?.Invoke();
+               
+            }
+        }
+
     }
-    private void Play()
+    private void OnDestroy()
+    {
+        GamePongMaster.Play -= Play;
+    }
+    public void Play()
     {
         if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
         {
@@ -66,7 +93,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(GetNewBall(0.5f));
             LevelUIManager.Instance.BallGray();
 
-            FindObjectOfType<AudioManager>().Play("BallJump");
+            FindObjectOfType<AudioManager>().PlayEffect("Ball");
         }
         if (isDragging)
         {
@@ -102,11 +129,26 @@ public class GameManager : MonoBehaviour
         numberBallUse += 1;
 
         //set lose
-        if(numberBallUse == GameController.Instance.numberBall && done < GameController.Instance.numCup )
+        if(GameController.Instance.modeGame == ModeGame.Mode.BEER)
         {
-            GamePongMaster.Lose.Invoke();
-           
+            if (numberBallUse == GameController.Instance.numberBall && done < GameController.Instance.numCup )
+            {
+                GamePongMaster.Play -= Play;
+                StartCoroutine(SetLoseWhenUseFullBallCup(timeToWait));
+
+            }
         }
+        else
+        {
+            if (numberBallUse == GameController.Instance.numberBall && done < GameController.Instance.numStar)
+            {
+                
+                GamePongMaster.Play -= Play;
+                StartCoroutine(SetLoseWhenUseFullBallStar(timeToWait));
+
+            }
+        }
+        
     }
     private bool IsMouseOverUI()
     {
@@ -134,27 +176,47 @@ public class GameManager : MonoBehaviour
     {
         return done;
     }
-    private void ChangeEffect()
-    {
-        if(numberBallUse == GameController.Instance.numberBall - 1)
-        {
-            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[0];
-        }
-        else if (numberBallUse == GameController.Instance.numberBall - 2)
-        {
-            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[1];
-        }
-        else
-        {
-            effect.GetComponent<SpriteRenderer>().sprite = effectSprite[2];
-        }
-
-
-    }
     public static int NumberBallUse()
     {
         return numberBallUse;
     }
 
+    private IEnumerator SetLoseWhenUseFullBallCup(float time)
+    {
+        if(GameController.Instance.modeGame == ModeGame.Mode.BEER)
+        {
+            yield return new WaitForSeconds(time);
+
+            if ((BallControl.ballIncup == true && done == GameController.Instance.numCup))
+            {
+
+                GamePongMaster.Win.Invoke();
+                
+            }
+            else
+            {
+                GamePongMaster.Lose.Invoke();
+            }
+        }
+        
+    }
+    private IEnumerator SetLoseWhenUseFullBallStar(float time)
+    {
+        if (GameController.Instance.modeGame == ModeGame.Mode.STAR)
+        {
+            yield return new WaitForSeconds(time);
+
+            if (done == GameController.Instance.numStar)
+            {
+                GamePongMaster.Win.Invoke();
+               
+            }
+            else
+            {
+                GamePongMaster.Lose.Invoke();
+            }
+        }
+        
+    }
 }
  

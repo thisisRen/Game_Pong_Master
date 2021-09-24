@@ -24,15 +24,13 @@ public class LoadGamePlay : MonoBehaviour
     }
     public void LoadGame()
     {
-        if(level.listLevel[level.FindIndexListChoosing()].current == true)
+        if (level.listLevel[level.FindIndexListChoosing()].current == true)
         {
-          
+
             gamePlay = Instantiate(level.listLevel[level.FindIndexListChoosing()].gamePlay);
-         
-            
+
         }
-            
-            
-        
+
+
     }
 }

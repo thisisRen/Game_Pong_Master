@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sound:
   - name: Music
-    onSound: 0
+    onSound: 1
   - name: Effect
     onSound: 1
+  Popups:
+  - name: Menu
+    active: 1
+  - name: Chapter
+    active: 0

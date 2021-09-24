@@ -64,6 +64,14 @@ public class DATA_BALL : ScriptableObject
         }
         StoreBall[index].IsChoose = true;
     }
+    public void Clean(int index)
+    {
+        foreach (Ball element in StoreBall)
+        {
+            element.current = false;
+        }
+        StoreBall[index].current = true;
+    }
 }
 
 [System.Serializable]
@@ -74,7 +82,7 @@ public class Ball
     public Sprite avatar;
 
     public int Price;
-
+    public bool current;
     public bool IsBuy;
     public bool IsChoose;
 }
