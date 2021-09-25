@@ -81,12 +81,12 @@ public class GameManager : MonoBehaviour
     }
     public void Play()
     {
-        if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
+        if (Input.GetMouseButtonDown(0) && !IsMouseOverUI() && Time.timeScale != 0)
         {
             isDragging = true;
             OnDragStart();
         }
-        if (Input.GetMouseButtonUp(0) && !IsMouseOverUI())
+        if (Input.GetMouseButtonUp(0) && !IsMouseOverUI() && Time.timeScale != 0)
         {
             isDragging = false;
             OnDragEnd();
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
             FindObjectOfType<AudioManager>().PlayEffect("Ball");
         }
-        if (isDragging)
+        if (isDragging && !IsMouseOverUI())
         {
             OnDrag();
         }
@@ -103,17 +103,15 @@ public class GameManager : MonoBehaviour
 
     void OnDragStart()
     {
-        if(Time.timeScale != 0)
-        {
-            ball.DeactivateRb();
-            startPoins = cam.ScreenToWorldPoint(Input.mousePosition);
-            trajectory.Show();
-        }
+      
+        ball.DeactivateRb();
+        startPoins = cam.ScreenToWorldPoint(Input.mousePosition);
+        trajectory.Show();
         
     }
     void OnDrag()
     {
-        if (!IsMouseOverUI() && Time.timeScale != 0)
+        if (!IsMouseOverUI())
         {
             endPoins = cam.ScreenToWorldPoint(Input.mousePosition);
             distance = Vector2.Distance(startPoins, endPoins);
