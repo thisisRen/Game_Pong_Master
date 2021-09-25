@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -35,8 +36,12 @@ public class MainMenuController : MonoBehaviour
         level.LoadData();
         cup.LoadData();
         FindObjectOfType<AudioManager>().PlayMusic("MusicMainGame");
-    }
 
+        maxLevel.text = "Level " + (PlayerPrefs.GetInt("MaxLevel")+1).ToString();
+
+        
+
+    }
     public void ShowStore()
     {
         mainMenu.SetActive(false);
@@ -58,6 +63,10 @@ public class MainMenuController : MonoBehaviour
     {
         cup.SaveData();
         ball.SaveData();
+    }
+    public void LevelCurrent()
+    {
+        SceneManager.LoadScene(1);
     }
     
 }

@@ -3853,7 +3853,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 958598761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1976196613}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: LevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &958598761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,7 +4209,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022392055}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -5269,8 +5281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 514.52026, y: -86}
-  m_SizeDelta: {x: 125.5612, y: 92.5082}
+  m_AnchoredPosition: {x: 508.84903, y: -86}
+  m_SizeDelta: {x: 114.2189, y: 92.5082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1356453919
 MonoBehaviour:
@@ -5299,13 +5311,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 80
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: /27
+  m_Text: /18
 --- !u!222 &1356453920
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5749,7 +5761,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 12
+  m_Text: 
 --- !u!222 &1493848582
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6019,7 +6031,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -6429,7 +6441,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -7101,7 +7113,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: /27
+  m_Text: /54
 --- !u!222 &1759093323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7349,7 +7361,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828208801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7933,7 +7945,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2069288476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3f6e4732e0cfc4e9c1c6f000b6ee55, type: 3}
+  m_Script: {fileID: 11500000, guid: f45f935a139578046b792548eef480e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: 6176ea23881f763478ab8381eb28b405, type: 2}
@@ -7946,6 +7958,8 @@ MonoBehaviour:
   levelDone: {fileID: 1038027697}
   fillStar: {fileID: 1593645596}
   fillLevel: {fileID: 1541678999}
+  bestStar: {fileID: 1022392057}
+  bestLevel: {fileID: 1828208803}
 --- !u!1 &2077712835
 GameObject:
   m_ObjectHideFlags: 0

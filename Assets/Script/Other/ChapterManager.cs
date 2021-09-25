@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ChapterManager : MonoBehaviour
 {
@@ -14,22 +14,22 @@ public class ChapterManager : MonoBehaviour
 
     public Text starDone, levelDone;
     public Image fillStar, fillLevel;
+    public Image bestStar, bestLevel;
     private void Awake()
     {
         Instance = this;
     }
     void Start()
     {
+        ShowUI();
         parentLevel.GetComponent<ShowUILevel>().ShowLevel();
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         ShowUI();
-       
     }
+    // Update is called once per frame
     public void Home()
     {
         level.SaveData();
@@ -60,7 +60,7 @@ public class ChapterManager : MonoBehaviour
             right.gameObject.SetActive(true);
             left.gameObject.SetActive(false);
             chapter.text = "CHAPTER 1";
-            Fill(0, 9);
+     
         }
         else if(parentLevel.GetComponent<RectTransform>().position.x >= -1845)
         {
@@ -68,21 +68,19 @@ public class ChapterManager : MonoBehaviour
             left.gameObject.SetActive(true);
             right.gameObject.SetActive(false);
             chapter.text = "CHAPTER 2";
-            Fill(9, 17);
+    
         }
+        Fill();
     }
-    private void Fill(int minLevel, int maxLevel)
+    private void Fill()
     {
         int starD = 0;
         int levelD = 0;
-        for(int i= minLevel; i< maxLevel; i++)
+        for(int i= 0; i< level.listLevel.Count; i++)
         {
-            if(level.listLevel[i].stars >= 0)
+            if(level.listLevel[i].stars > 0)
             {
                 starD += level.listLevel[i].stars;
-            }
-            if (level.listLevel[i].isPlay == true)
-            {
                 levelD += 1;
             }
         }
@@ -96,7 +94,16 @@ public class ChapterManager : MonoBehaviour
             starDone.DOKill();
         });
 
-        fillStar.fillAmount = starD / 27;
-        fillLevel.fillAmount = levelD / 9;
+        fillStar.fillAmount = Mathf.Lerp(fillStar.fillAmount, (float)starD / 54, 3f * Time.deltaTime);
+
+        if(starD == 54)
+        {
+            bestStar.enabled = true;
+        }
+        fillLevel.fillAmount = Mathf.Lerp(fillLevel.fillAmount, (float)levelD / 18, 3f * Time.deltaTime);
+        if (levelD == 18)
+        {
+            bestLevel.enabled = true;
+        }
     }
 }

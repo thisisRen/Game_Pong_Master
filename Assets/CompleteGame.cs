@@ -18,7 +18,7 @@ public class CompleteGame : MonoBehaviour
     public Text addCoin;
     public Text myCoin;
 
-    private static int coin = 0;
+    private static int coin;
 
     void Start()
     {
@@ -31,7 +31,8 @@ public class CompleteGame : MonoBehaviour
         NumberStar();
         StartCoroutine(CollectStar());
         StartCoroutine(SpawnCoin());
-        
+
+        coin = PlayerPrefs.GetInt("Coin");
 
     }
 
@@ -42,6 +43,7 @@ public class CompleteGame : MonoBehaviour
         if(data.listLevel[data.FindIndexListChoosing()].stars > 0)
         {
             data.listLevel[data.FindIndexListChoosing()+1].isPlay = true;
+            PlayerPrefs.SetInt("MaxLevel", data.FindIndexListChoosing() + 1);
         }
         
     }
@@ -98,6 +100,7 @@ public class CompleteGame : MonoBehaviour
           
             
             PlayerPrefs.SetInt("MaxLevel", data.FindIndexListChoosing() + 1);
+            Debug.Log(PlayerPrefs.GetInt("MaxLevel").ToString());
             data.listLevel[data.FindIndexListChoosing() + 1].current = true;
             data.Refresh(data.FindIndexListChoosing() + 1);
             SceneManager.LoadScene(1);

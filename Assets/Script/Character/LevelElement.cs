@@ -35,7 +35,7 @@ public class LevelElement : MonoBehaviour
         {
             lockLevel.enabled = false;
             elementLevel.GetComponent<Image>().sprite = notComplete;
-            start.SetActive(false);
+            start.SetActive(true);
         }
         else if(data.isPlay == true && data.stars == 3)
         {
@@ -45,7 +45,7 @@ public class LevelElement : MonoBehaviour
         }
 
 
-        if(data.stars != 0)
+        if(data.stars > 0)
         {
             for(int i=0; i< data.stars; i++)
             {

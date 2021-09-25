@@ -17,20 +17,20 @@ MonoBehaviour:
     name: 
     gamePlay: {fileID: 3330294317585360152, guid: d3c76b7fea4f00c4894015597d6810a7, type: 3}
     isPlay: 1
-    current: 0
-    stars: 3
-    coin: 0
+    current: 1
+    stars: 0
+    coin: 15
   - ID: 1
     name: 
     gamePlay: {fileID: 4833119963598878022, guid: 1cc9a840d0a600645a5400abc87ef9e4, type: 3}
-    isPlay: 1
-    current: 1
-    stars: 3
-    coin: 0
+    isPlay: 0
+    current: 0
+    stars: 0
+    coin: 15
   - ID: 2
     name: 
     gamePlay: {fileID: 1586249198824484267, guid: e9e4dd0af8063a242be1b855079941a9, type: 3}
-    isPlay: 1
+    isPlay: 0
     current: 0
     stars: 0
     coin: 15
@@ -117,7 +117,7 @@ MonoBehaviour:
     isPlay: 0
     current: 0
     stars: 0
-    coin: 15
+    coin: 5
   - ID: 15
     name: 
     gamePlay: {fileID: 7246170293604027434, guid: 98e0b868a0608af4d8c047e20ea2607d, type: 3}
