@@ -103,21 +103,27 @@ public class GameManager : MonoBehaviour
 
     void OnDragStart()
     {
-        ball.DeactivateRb();
-        startPoins = cam.ScreenToWorldPoint(Input.mousePosition);
-        trajectory.Show();
+        if(Time.timeScale != 0)
+        {
+            ball.DeactivateRb();
+            startPoins = cam.ScreenToWorldPoint(Input.mousePosition);
+            trajectory.Show();
+        }
+        
     }
     void OnDrag()
     {
+        if (!IsMouseOverUI() && Time.timeScale != 0)
+        {
+            endPoins = cam.ScreenToWorldPoint(Input.mousePosition);
+            distance = Vector2.Distance(startPoins, endPoins);
+            direction = (startPoins - endPoins).normalized;
+            force = direction * distance * pushForce;
 
-        endPoins = cam.ScreenToWorldPoint(Input.mousePosition);
-        distance = Vector2.Distance(startPoins, endPoins);
-        direction = (startPoins - endPoins).normalized;
-        force = direction * distance * pushForce;
+            Debug.DrawLine(startPoins, endPoins);
 
-        Debug.DrawLine(startPoins, endPoins);
-
-        trajectory.UpdateDots(ball.pos,force);
+            trajectory.UpdateDots(ball.pos, force);
+        }
     }
     void OnDragEnd()
     {

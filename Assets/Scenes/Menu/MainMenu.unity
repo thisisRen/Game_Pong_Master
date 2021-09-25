@@ -2943,9 +2943,9 @@ RectTransform:
   m_Father: {fileID: 1548027}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 522, y: -216}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1482, y: 1473}
   m_SizeDelta: {x: 593.18555, y: 195.05078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &817594673
@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   react: {fileID: 817594672}
-  newPos: -410
+  newPos: 514
   time: 0.2
 --- !u!1 &835170337
 GameObject:

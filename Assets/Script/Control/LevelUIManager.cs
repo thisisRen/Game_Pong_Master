@@ -81,8 +81,9 @@ public class LevelUIManager : MonoBehaviour
     }
     public void Pause()
     {
-        pausePopup.SetActive(true);
         Time.timeScale = 0f;
+        pausePopup.SetActive(true);
+      
     }
     
     public void Home()

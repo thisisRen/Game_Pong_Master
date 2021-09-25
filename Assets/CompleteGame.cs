@@ -45,6 +45,7 @@ public class CompleteGame : MonoBehaviour
             data.listLevel[data.FindIndexListChoosing()+1].isPlay = true;
             PlayerPrefs.SetInt("MaxLevel", data.FindIndexListChoosing() + 1);
         }
+        data.SaveData();
         
     }
     private int NumberStar()
